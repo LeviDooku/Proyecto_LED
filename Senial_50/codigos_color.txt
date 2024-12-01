@@ -1,0 +1,3 @@
+Rojo: FF0000
+Amarillo: FFFF00
+Negro: 0

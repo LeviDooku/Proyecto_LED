@@ -31,8 +31,6 @@ Resumen de funcionamiento:
 
 Programa que muestra un frame en una matriz 64x64 montada. Objetivo:
 Comprobar que el envío de datos a la matriz es el correcto.
-
-
 */
 
 

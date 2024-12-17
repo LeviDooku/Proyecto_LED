@@ -35,7 +35,10 @@ void loop() {
 
   for (int i = 0; i < NUM_LEDS; i++) {
     // Encender el LED actual
+    FastLED.show();
     leds[i] = (i%0xFF); // Cambia el color si lo deseas
+    delay(delayTime);
+    FastLED.clear();
   }
   delay(10); // Esperar el tiempo correspondiente
   FastLED.show();

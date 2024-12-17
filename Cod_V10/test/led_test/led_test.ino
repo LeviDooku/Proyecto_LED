@@ -25,16 +25,19 @@ https://fastled.io/docs/group___pixel_types.html#ggaeb40a08b7cb90c1e21bd40826155
 #include <FastLED.h>
 
 #define DATA_PIN 4          //Data pin
-#define NUM_LEDS 10         //Número total LED's
+#define NUM_LEDS 10        //Número total LED's
+#define ANCHO 5
+#define ALTO 2
 #define NIVELES_BRILLO 3 //Niveles de brillo: 15%, 50%, 100%
 #define DURACION 10000      //Duración en ms por nivel de brillo (10 segundos)
 
 CRGB leds[NUM_LEDS];
 
-const uint8_t niveles_brillo[NIVELES_BRILLO] = {38, 128, 255}; 
+const uint8_t niveles_brillo[NIVELES_BRILLO] = {38, 128, 255};
 
 void setup() {
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+  FastLED.clear();
 }
 
 void loop() {
@@ -47,7 +50,7 @@ void loop() {
 
 //Función para hacer más claro el loop
 void testeo(const CRGB &color){
-    for(int i = 0; i < niveles_brillo; i++){ //Recorremos el array de niveles_brillo
+    for(int i = 0; i < NIVELES_BRILLO; i++){ //Recorremos el array de niveles_brillo
         FastLED.setBrightness(niveles_brillo[i]);
         flujo_leds(color); //Encendemos los leds correspondientes con el brillo que toca
         delay(DURACION);
@@ -58,8 +61,14 @@ void testeo(const CRGB &color){
 
 //Función para encender los LED's correspondientes
 void flujo_leds(const CRGB &color){
-    for (int i = 0; i < NUM_LEDS; i++) {
-        leds[i] = color;
+  int ledindex = 0;
+  for(int y = 0; y < ALTO; y++){
+    for(int x = 0; x < ANCHO; x++){
+      if(ledindex < NUM_LEDS){
+        leds[ledindex] = color;
+        ledindex++;
+      }
     }
+  }
   FastLED.show();
 }

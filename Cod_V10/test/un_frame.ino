@@ -1,7 +1,7 @@
 /* 
   ******************************************************
   * un_frame.ino                                       *
-  * Proyecto: Señal LED - V0.                          *
+  * Proyecto: Señal LED - V0.1                         *
   * Autores:                                           *
   *   - David Jándula Sánchez                          *
   *   - Pedro Velasco Santana                          *
@@ -24,6 +24,15 @@
 
     Flujo de datos: Zigzag vertical (Top-to-Bottom)
     Conexión inicial: Panel P0 (esquina superior izquierda)
+*/
+
+/*
+Resumen de funcionamiento:
+
+Programa que muestra un frame en una matriz 64x64 montada. Objetivo:
+Comprobar que el envío de datos a la matriz es el correcto.
+
+
 */
 
 

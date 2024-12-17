@@ -19,7 +19,7 @@ tiempo determinado. Objetivo: saber como viajan los datos dentro de la matriz.
 
 #include <FastLED.h>
 
-#define NUM_LEDS 1024 // 16x32 = 512 LEDs
+#define NUM_LEDS 1024 // 16x64 = 1024 LEDs
 #define DATA_PIN 4   // Pin de datos donde está conectado el LED strip
 
 CRGB leds[NUM_LEDS];

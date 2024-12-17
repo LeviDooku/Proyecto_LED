@@ -37,6 +37,7 @@ Comprobar que el envío de datos a la matriz es el correcto.
 
 
 #include <FastLED.h>
+
 #define NUM_LEDS 4096
 #define DATA_PIN 4
 

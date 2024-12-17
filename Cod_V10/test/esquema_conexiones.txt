@@ -1,0 +1,10 @@
+Fila 1: [P0] → [P1]
+Fila 2: [P3] ← [P2]
+Fila 3: [P4] → [P5]
+Fila 4: [P7] ← [P6]
+Fila 5: [P8] → [P9]
+Fila 6: [P11] ← [P10]
+Fila 7: [P12] → [P13]
+Fila 8: [P15] ← [P14]
+
+

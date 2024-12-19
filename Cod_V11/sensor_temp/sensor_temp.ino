@@ -17,15 +17,22 @@ Programa que implementa la programación necesaria para
 monitorear la temperatura mediante umbrales
 */
 
-//Frame
 #include <FastLED.h>
 
+//Config LED's
 #define NUM_LEDS 256
-#define DATA_PIN 4
+#define LED_PIN 4
+
+//Config KY - 028 
+#define TEMP_PIN A0 //Sensor análogico para respuesta rápida
+
+//Umbrales brillo y temp
+int ky028_temp = 0;
+int brillo = 0;
 
 CRGB leds[NUM_LEDS];
 
-//Frame
+// Config Frame
 
 // Source : Rows
 // Line   : Row
@@ -105,14 +112,40 @@ int transform(int i, int j) {
 
 
 void setup() {
-  FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
+    Serial.begin(9600);
+    FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);
+    FastLED.clear();
 }
 
 void loop() {
+  
+    //Leer valor del KY-028
+    ky028_temp = analogRead(TEMP_PIN);
+    
+    //Calcular el brillo basado en los umbrales del KY-028
+    if (ky028_temp < 400) {
+        brillo = 255; //Brillo alto aprox 25 Cº
+    } else if (ky028_temp < 600) {
+        brillo = 128; //Brillo medio
+    } else {
+        brillo = 50; //Brillo bajo
+    }
+
+    FastLED.setBrightness(brillo);
+    
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             leds[transform(i, j)] = pgm_read_dword(&ledarray0[i * WIDTH + j]);
+        }
+        FastLED.show();
     }
-    FastLED.show();
-  }
+    
+    Serial.print("Valor KY-028: ");
+    Serial.println(ky028_temp);
+
+    Serial.print("Brillo LEDs: ");
+    Serial.println(brillo);
+    Serial.println("----------------------");
+
+    delay(1000); // Pausa de 1 segundo
 }

@@ -18,17 +18,17 @@ monitorear la temperatura mediante umbrales
 */
 
 #include <FastLED.h>
+#include <DHT.h>
 
 //Config LED's
 #define NUM_LEDS 256
-#define LED_PIN 4
+#define LED_PIN 2
 
-//Config KY - 028 
-#define TEMP_PIN A0 //Sensor análogico para respuesta rápida
+//Config DHT11 
+#define DHT_PIN 4   
+#define DHTTYPE DHT11
 
-//Umbrales brillo y temp
-int ky028_temp = 0;
-int brillo = 0;
+DHT dht(DHT_PIN, DHTTYPE);
 
 CRGB leds[NUM_LEDS];
 
@@ -113,23 +113,21 @@ int transform(int i, int j) {
 
 void setup() {
     Serial.begin(9600);
+    dht.begin();
     FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);
     FastLED.clear();
 }
 
 void loop() {
-  
-    //Leer valor del KY-028
-    ky028_temp = analogRead(TEMP_PIN);
-    
-    //Calcular el brillo basado en los umbrales del KY-028
-    if (ky028_temp < 400) {
-        brillo = 255; //Brillo alto aprox 25 Cº
-    } else if (ky028_temp < 600) {
-        brillo = 128; //Brillo medio
-    } else {
-        brillo = 50; //Brillo bajo
+    float temperature = dht.readTemperature();   
+
+    if (isnan(temperature)) {
+      Serial.println("Error leyendo el sensor DHT");
+      return;
     }
+
+    int brillo = map(temperature, 20, 40, 255, 0);
+    brillo = constrain(brillo, 0, 255);
 
     FastLED.setBrightness(brillo);
     
@@ -139,13 +137,14 @@ void loop() {
         }
         FastLED.show();
     }
+
+    Serial.print("Temperatura: ");
+    Serial.println(temperature);
+
+    Serial.println("-------------");
     
-    Serial.print("Valor KY-028: ");
-    Serial.println(ky028_temp);
-
-    Serial.print("Brillo LEDs: ");
-    Serial.println(brillo);
-    Serial.println("----------------------");
-
-    delay(1000); // Pausa de 1 segundo
+    Serial.print("Brillo :");
+    Serial.println(brillo); 
+    
+    delay(1000); //Pausa de 1 segundo
 }

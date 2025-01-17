@@ -14,7 +14,18 @@
 Resumen de funcionamiento:
 
 Programa que implementa la programación necesaria para 
-monitorear la temperatura mediante umbrales
+monitorear la temperatura mediante un mapeo en base a las señales
+obtenidas con un sensor de temperatura DHT11.
+
+FUTURO: 
+
+Implementar un sistema con sensores DS18B20, los cuales pueden controlar
+varios sensores con un pin analógico. Con un rango de unos -55 a 125 grados (DHT11 hasta 50).
+Como es analógico es ideal para crear umbrales de brillo.
+
+DHT11 permite monitorear humedad, es esto útil? Valorar
+
+Controlar el brillo con fotoresistores
 */
 
 #include <FastLED.h>
@@ -146,5 +157,5 @@ void loop() {
     Serial.print("Brillo :");
     Serial.println(brillo); 
     
-    delay(1000); //Pausa de 1 segundo
+    delay(1000); //Pausa de 1 segundo (Recomendado por el fabricante)
 }

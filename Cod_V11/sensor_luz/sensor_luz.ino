@@ -118,10 +118,17 @@ void setup() {
 
 void loop() {
 
+     //Leer el valor del fotoresistor
+     sensorValue = analogRead(A0);
+
      for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             leds[transform(i, j)] = pgm_read_dword(&ledarray0[i * WIDTH + j]);
         }
         FastLED.show();
     }
+
+    FastLED.setBrightness(map(sensorValue, sensorLow, sensorHigh, 0, 255));
+
+    delay(500);
 }

@@ -97,11 +97,23 @@ int transform(int i, int j) {
     return x;
 }
 
+int sensorValue;
+int sensorLow = 1023;
+int sensorHigh = 0;
 
 void setup() {
     Serial.begin(9600);
     FastLED.addLeds<NEOPIXEL, LED_PIN>(leds, NUM_LEDS);
     FastLED.clear();
+
+    //Calibrar el fotoresistor durante los primeros 5 segundos
+    while (millis() < 1000){
+      sensorValue = analogRead(A0);
+      if (sensorValue > sensorHigh)
+        sensorHigh = sensorValue;
+      if (sensorValue < sensorLow)
+        sensorLow = sensorValue;
+    }
 }
 
 void loop() {

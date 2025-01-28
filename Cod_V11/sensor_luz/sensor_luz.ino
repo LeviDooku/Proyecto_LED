@@ -6,7 +6,7 @@
   *   - David Jándula Sánchez                          *
   *   - Pedro Velasco Santana                          *
   *                                                    *
-  * Granada - 2024                                     *
+  * Granada - 2025                                     *
   ******************************************************
 */
 

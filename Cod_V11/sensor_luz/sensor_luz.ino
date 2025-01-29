@@ -107,13 +107,13 @@ void setup() {
     FastLED.clear();
 
     //Calibrar el fotoresistor durante los primeros 5 segundos
-    while (millis() < 1000){
+    while (millis() < 3000){
       sensorValue = analogRead(A0);
       if (sensorValue > sensorHigh)
         sensorHigh = sensorValue;
       if (sensorValue < sensorLow)
-        sensorLow = sensorValue;
-    }
+          sensorLow = sensorValue;
+      }
 }
 
 void loop() {

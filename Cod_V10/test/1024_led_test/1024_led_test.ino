@@ -28,6 +28,7 @@ Comprobar que el envío de datos a la matriz es el correcto.
 */
 
 #include <FastLED.h>
+#include <IRremoteESP8266.h>
 
 #define NUM_LEDS 1024
 #define DATA_PIN 4

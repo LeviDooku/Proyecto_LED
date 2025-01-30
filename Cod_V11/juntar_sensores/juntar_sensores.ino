@@ -34,12 +34,6 @@ Falta parte LEDs y photoresistor
 
 DHT dht(DHT_PIN, DHTTYPE);
 
-//Config IR 1838
-#define IR_PIN 12
-
-IRrecv irrecv(IR_PIN);
-decode_results results;
-
 //Config pantalla LCD
 #define RS 7 
 #define E 6
@@ -69,9 +63,6 @@ void setup(){
   //Inicialización DHT11
   dht.begin();
 
-  //Inicialización IR 1838
-  irrecv.enableIRIn();
-
   delay(1000);
   lcd.clear();
 }
@@ -98,5 +89,4 @@ void loop(){
     lcd.clear();
 
     Serial.write((uint8_t*)(&sensores), sizeof(sensor_data));
-    
  }

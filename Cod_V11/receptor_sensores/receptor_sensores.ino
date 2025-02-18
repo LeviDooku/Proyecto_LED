@@ -1,9 +1,3 @@
-#include <LiquidCrystal.h>
-
-#include <IRremoteESP8266.h>
-#include <IRtimer.h>
-#include <IRrecv.h>
-
 /* 
   ******************************************************
   * sensor_luz.ino                                    *
@@ -16,8 +10,13 @@
   ******************************************************
 */
 
+#include <LiquidCrystal.h>
+#include <IRremoteESP8266.h>
+#include <IRtimer.h>
+#include <IRrecv.h>
 #include <FastLED.h>
 #include "DHT.h"
+
 #define DHTTYPE DHT11 // DHT 11
 
 //Config LED's
@@ -37,8 +36,6 @@
 #define IR_PIN D3
 #define DHT_PIN D2
 
-
-
 CRGB leds[NUM_LEDS];
 
 // Config Frame
@@ -53,6 +50,7 @@ CRGB leds[NUM_LEDS];
 // Colour Format: RGB
 // Brightness   : 100%
 // Colour Space : 32 bits
+
 uint32_t ledarray0[] PROGMEM = {
 0xFF0000, 0xFF0000, 0xFF0000, 0xFF0000, 0xFF0000, 0xFF0000, 0xFF0000, 0xFF0000, 
 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 

@@ -216,12 +216,6 @@ void setup() {
 }
 
 void loop() {
-  /*
-  for (int i = 0; i < NUM_LEDS; i++) {
-    leds[i] = frame0[i]; 
-  }
-  */
-
   for (int x = 0; x < 4; x++) {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH/4; j++) {

@@ -19,5 +19,7 @@
 
 2. 
 - Optimización de programa: 
+    1. Mapear colores en una paleta de colores (ahorrar memoria -> +frames)
+    2. Usar interrupciones en el sensor IR
 
-
+- Editor de frames (programa independiente con Python)

@@ -34,12 +34,6 @@ Falta parte LEDs y photoresistor
 
 DHT dht(DHT_PIN, DHTTYPE);
 
-//Config IR 1838
-#define IR_PIN 12
-
-IRrecv irrecv(IR_PIN);
-decode_results results;
-
 //Config pantalla LCD
 #define RS 7 
 #define E 6
@@ -56,11 +50,6 @@ void imprimeMensaje(String mensaje, int col, int row){
     lcd.print(mensaje);
 }
 
-//Variables photoresistor
-int photo_value;
-int sensorLow = 1023;
-int sensorHigh = 0;
-
 void setup(){
   //Inicialización LCD
   lcd.begin(16, 2);
@@ -74,17 +63,7 @@ void setup(){
   //Inicialización DHT11
   dht.begin();
 
-  //Inicialización IR 1838
-  irrecv.enableIRIn();
-  
-  //Calibrar photoresistor
-  while (millis() < 3000){
-    photo_value = analogRead(A0);
-    if (photo_value > sensorHigh)
-      sensorHigh = photo_value;
-    if (photo_value < sensorLow)
-        sensorLow = photo_value;
-  }
+  delay(1000);
   lcd.clear();
 }
 
@@ -95,38 +74,18 @@ typedef struct{
 } sensor_data;
 
 void loop(){
-    sensor_data sensores;
+    sensor_data sensores = {0, 0, 0};
     sensores.temperature = dht.readTemperature();   
 
     if (isnan(sensores.temperature)){
       lcd.home();
-      lcd.print("[-] ERROR");
+      lcd.print("[-] ERROR DHT11");
       return;
     }
 
     imprimeMensaje("[+] Temp: "+String(sensores.temperature)+"C", 0, 0);
     
-    photo_value = analogRead(A0);
-    sensores.brightness = map(photo_value, sensorLow, sensorHigh, 0, 255);
-    /*
-    if (irrecv.decode(&results)){
-        switch (results.value) {
-          case 0xFFA25D:
-            sensores.frame = 1;
-            break;
-          case 0xFF629D:
-            sensores.frame = 2;
-            break;
-          case 0xFFE21D:
-            sensores.frame = 3;
-            break;
-        }
-    }
-    irrecv.resume(); 
-    */
-    sensores.frame = (sensores.frame+1)%3;
-    imprimeMensaje("[+] Frame: "+String(sensores.frame), 0, 1);
-    delay(200);
+    delay(2000);
     lcd.clear();
 
     Serial.write((uint8_t*)(&sensores), sizeof(sensor_data));

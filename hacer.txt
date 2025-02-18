@@ -1,0 +1,23 @@
+1.
+- Programa que haga la animación pedida: 
+	1. Señal 50
+	2. Destello
+	3. Señal Obras
+	4. Destello
+	5. Mensaje reduzca la velocidad
+	6. Destello
+	
+	Mando:
+
+	El mando deberá controlar la animación:
+
+	· Un botón para activar la animación
+	· Botones para los distintos frames estáticos
+	· Botones para controlar la intensidad de la luz (25, 50, 100) 
+
+	Frenar la actividad si la temperatura es muy alta
+
+2. 
+- Optimización de programa: 
+
+

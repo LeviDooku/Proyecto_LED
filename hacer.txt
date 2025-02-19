@@ -23,3 +23,7 @@
     2. Usar interrupciones en el sensor IR
 
 - Editor de frames (programa independiente con Python)
+
+
+sobre la señal de 50:
+    - separar un poco los números y que sean un poco más grandes
